@@ -49,7 +49,7 @@ export default function Signup() {
           loading
         </button>
       )}
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error">Error: {error}</p>}
     </form>
   );
 }
