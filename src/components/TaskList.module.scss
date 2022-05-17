@@ -1,0 +1,66 @@
+@use "../style/variable.scss" as var;
+.task-container {
+  max-width: 480px;
+  margin: 0 auto;
+}
+.task {
+  width: 100%;
+  background-color: #f1f3f5;
+  height: 48px;
+  border: solid 1px var.$secondary-text-color;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  position: relative;
+
+  &:hover {
+    background-color: #e8f1fa;
+    cursor: pointer;
+  }
+}
+.task-title {
+  font-size: 14px;
+  padding: 10px;
+  color: var.$secondary-text-color;
+  font-weight: 600;
+}
+.progress {
+  width: 150px;
+  height: 47px;
+  border-top: 8px solid var.$secondary-text-color;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+}
+.icons {
+  margin-left: auto;
+  color: var.$icon-color;
+  transition: all 0.3s;
+  width: 35px;
+  &:hover {
+    color: var.$color-green;
+    cursor: pointer;
+  }
+}
+.trash {
+  margin-left: 10px;
+  color: var.$icon-color;
+  transition: all 0.3s;
+  width: 35px;
+  &:hover {
+    color: red;
+    cursor: pointer;
+  }
+}
+// .close {
+//   font-size: 27px;
+//   font-weight: 900;
+//   color: rgb(227, 19, 19);
+//   margin-right: 10px;
+//   cursor: pointer;
+//   &:hover {
+//     color: rgb(255, 5, 5);
+//   }
+// }

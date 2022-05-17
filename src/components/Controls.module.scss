@@ -1,0 +1,17 @@
+@use "../style/variable.scss" as var;
+.controls-container {
+  max-width: 47.8rem;
+  margin: 30px auto 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.icons {
+  color: var.$icon-color;
+  transition: all 0.3s;
+  width: 35px;
+  &:hover {
+    color: var.$color-green;
+    cursor: pointer;
+  }
+}
