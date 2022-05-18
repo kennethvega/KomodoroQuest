@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Options from "./Options";
+import Options from "../../components/Options";
 import styles from "./Home.module.scss";
 import Controls from "../../components/Controls";
 import TaskList from "../../components/TaskList";
-import Timer from "./Timer";
+import Timer from "../../components/Timer";
 import Footer from "../../components/Footer";
 import AddForm from "../../components/modal/AddForm";
 
@@ -14,8 +14,16 @@ function Home() {
   const [stage, setStage] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [hours, setHours] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  // show modal
+  const showModalFormHandler = () => {
+    setShowModal(true);
+  };
+  // close modal
+  const closeModalHandler = () => {
+    setShowModal(false);
+  };
 
-  console.log(stage);
   const switchStage = (index) => {
     setStage(index);
   };
@@ -52,12 +60,14 @@ function Home() {
       <button className="btn-start" style={{ background: colorTheme() }}>
         Start
       </button>
-      {/* <AddForm /> */}
-      <Controls />
+
+      <Controls onShowModal={showModalFormHandler} />
       <TaskList />
+      {showModal && <AddForm onCloseModal={closeModalHandler} />}
       <Footer />
     </>
   );
 }
+// comment to add
 
 export default Home;

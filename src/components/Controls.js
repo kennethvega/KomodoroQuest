@@ -3,18 +3,30 @@ import styles from "./Controls.module.scss";
 import { GiProgression } from "react-icons/gi";
 import { IoIosAdd } from "react-icons/io";
 import { FiSettings } from "react-icons/fi";
-function Controls() {
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
+function Controls({ onShowModal }) {
   return (
     <div className={styles["controls-container"]}>
-      <div className={styles.icons}>
-        <IoIosAdd size="35px" title="Add Task" />
-      </div>
-      <div className={styles.icons}>
-        <GiProgression size="25px" title="See performance level" />
-      </div>
-      <div className={styles.icons}>
-        <FiSettings size="25px" title="Adjust settings" />
-      </div>
+      <Tippy content="Add a task">
+        <div>
+          <IoIosAdd
+            size="35px"
+            onClick={onShowModal}
+            className={styles.icons}
+          />
+        </div>
+      </Tippy>
+      <Tippy content="See performance level">
+        <div>
+          <GiProgression className={styles.icons} size="25px" />
+        </div>
+      </Tippy>
+      <Tippy content="Settings">
+        <div>
+          <FiSettings size="25px" className={styles.icons} />
+        </div>
+      </Tippy>
     </div>
   );
 }
