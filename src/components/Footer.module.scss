@@ -1,14 +1,23 @@
 .footer {
+  position: absolute;
+  top: 90%;
+  left: 50%;
   display: flex;
   max-width: 300px;
   margin-top: 40px;
-  margin-left: auto;
-  margin-right: auto;
+  // margin-left: auto;
+  // margin-right: auto;
   align-items: center;
   justify-content: center;
   & h2 {
     font-size: 14px;
     color: #c9c9c9;
     font-weight: 400;
+  }
+}
+@media (min-width: 200px) {
+  .footer {
+    width: 30rem;
+    left: calc(53.5% - 19rem);
   }
 }

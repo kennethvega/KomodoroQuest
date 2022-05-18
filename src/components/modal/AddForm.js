@@ -2,21 +2,55 @@ import React, { useState } from "react";
 import FormAddModal from "./FormAddModal";
 import styles from "./AddForm.module.scss";
 import Select from "react-select";
-// import styles from "./AddForm.module.scss";
+import { useAuthContext } from "../../hooks/useAuthContext";
+// firebase imports
+import { db } from "../../firebase/config";
+import { collection, addDoc } from "firebase/firestore";
 
 // dummy categories
 
 function AddForm({ onCloseModal }) {
+  const { user } = useAuthContext();
   const [taskName, setTaskName] = useState("");
   const [durationHours, setDurationHours] = useState("");
   const [durationMinutes, setDurationMinutes] = useState("");
-  const [alarm, setAlarm] = useState("");
-  const [shortBreak, setShortBreak] = useState("");
-  const [longBreak, setLongBreak] = useState("");
+  // alarm
+  const [alarmMinutes, setAlarmMinutes] = useState("");
+  // short break
+  const [shortBreakMinutes, setShortBreakMinutes] = useState("");
+  // long break
+  const [longBreakMinutes, setLongBreakMinutes] = useState("");
+
+  const reset = () => {
+    setTaskName("");
+    setDurationHours("");
+    setDurationMinutes("");
+    setAlarmMinutes("");
+    setShortBreakMinutes("");
+    setLongBreakMinutes("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const ref = collection(db, "tasks");
+    if (user) {
+      await addDoc(ref, {
+        taskName,
+        durationHours,
+        durationMinutes,
+        alarmMinutes,
+        shortBreakMinutes,
+        longBreakMinutes,
+      });
+    }
+
+    reset();
+    onCloseModal();
+  };
 
   return (
     <FormAddModal onCloseModal={onCloseModal}>
-      <form className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <h2>Add a task:</h2>
         <h2 className={styles.close} onClick={onCloseModal}>
           X
@@ -24,14 +58,15 @@ function AddForm({ onCloseModal }) {
         <label>
           <span>Task name:</span>
           <input
-            placeholder="maximum of 10 characters only"
-            maxLength={10}
+            placeholder="maximum of 20 characters only"
+            maxLength={20}
             required
             type="text"
             onChange={(e) => setTaskName(e.target.value)}
             value={taskName}
           />
         </label>
+        {/* duration task */}
         <div className={styles["label-container"]}>
           <label>
             <span>Duration of task</span>
@@ -40,31 +75,56 @@ function AddForm({ onCloseModal }) {
                 type="number"
                 placeholder="hours"
                 onChange={(e) => setDurationHours(e.target.value)}
+                value={durationHours}
               />
-              <input type="number" placeholder="mins" />
+              <input
+                type="number"
+                placeholder="mins"
+                onChange={(e) => setDurationMinutes(e.target.value)}
+                value={durationMinutes}
+                required
+              />
             </div>
           </label>
+          {/* alarm */}
           <label>
             <span>Alarm every</span>
             <div className={styles["input-container"]}>
-              <input type="number" placeholder="hours" />
-              <input type="number" placeholder="mins" />
+              <input
+                type="number"
+                placeholder="mins"
+                onChange={(e) => setAlarmMinutes(e.target.value)}
+                value={alarmMinutes}
+                required
+              />
             </div>
           </label>
         </div>
+        {/* breaks */}
         <div className={styles["label-container"]}>
           <label>
             <span>Short break</span>
             <div className={styles["input-container"]}>
-              <input type="number" placeholder="hours" />
-              <input type="number" placeholder="mins" />
+              <input
+                type="number"
+                placeholder="mins"
+                onChange={(e) => setShortBreakMinutes(e.target.value)}
+                value={shortBreakMinutes}
+                required
+              />
             </div>
           </label>
+
           <label>
             <span>Long break</span>
             <div className={styles["input-container"]}>
-              <input type="number" placeholder="hours" />
-              <input type="number" placeholder="mins" />
+              <input
+                type="number"
+                placeholder="mins"
+                onChange={(e) => setLongBreakMinutes(e.target.value)}
+                value={longBreakMinutes}
+                required
+              />
             </div>
           </label>
         </div>
