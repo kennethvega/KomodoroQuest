@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Options from "../../components/Options";
-import styles from "./Home.module.scss";
+import "./Home.scss";
 import Controls from "../../components/Controls";
 import TaskList from "../../components/TaskList";
 import Timer from "../../components/Timer";
 import Footer from "../../components/Footer";
 import AddForm from "../../components/modal/AddForm";
+import EditTask from "../../components/modal/EditTask";
 
 function Home() {
   const [pomodoro, setPomodoro] = useState(25);
@@ -15,6 +16,7 @@ function Home() {
   const [seconds, setSeconds] = useState(0);
   const [hours, setHours] = useState(0);
   const [showModal, setShowModal] = useState(false);
+
   // show modal
   const showModalFormHandler = () => {
     setShowModal(true);
@@ -46,24 +48,24 @@ function Home() {
       return "#B70233";
     }
   };
+
   return (
     <>
       <Options stage={stage} switchStage={switchStage} />
-      <div className={styles.container} style={{ background: colorTheme() }}>
+      <div className="container " style={{ background: colorTheme() }}>
         <Timer
           getTickingTime={getTickingTime}
           seconds={seconds}
           hours={hours}
         />
       </div>
-
       <button className="btn-start" style={{ background: colorTheme() }}>
         Start
       </button>
-
       <Controls onShowModal={showModalFormHandler} />
       <TaskList />
       {showModal && <AddForm onCloseModal={closeModalHandler} />}
+      {showModal && <EditTask onCloseModal={closeModalHandler} />}
       <Footer />
     </>
   );

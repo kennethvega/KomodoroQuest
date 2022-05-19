@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import FormAddModal from "./FormAddModal";
-import styles from "./AddForm.module.scss";
+import styles from "./FormAddEdit.module.scss";
 import Select from "react-select";
 import { useAuthContext } from "../../hooks/useAuthContext";
 // firebase imports
 import { db } from "../../firebase/config";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 // dummy categories
 
@@ -34,6 +34,7 @@ function AddForm({ onCloseModal }) {
     e.preventDefault();
     const ref = collection(db, "tasks");
     if (user) {
+      onCloseModal();
       await addDoc(ref, {
         taskName,
         durationHours,
@@ -41,11 +42,12 @@ function AddForm({ onCloseModal }) {
         alarmMinutes,
         shortBreakMinutes,
         longBreakMinutes,
+        uid: user.uid,
+        createdAt: serverTimestamp(),
       });
     }
 
     reset();
-    onCloseModal();
   };
 
   return (
