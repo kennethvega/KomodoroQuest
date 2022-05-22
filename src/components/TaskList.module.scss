@@ -5,7 +5,8 @@
 }
 .task {
   width: 100%;
-  background-color: #f1f3f5;
+  background-color: #fbfbfb;
+
   height: 48px;
   border: solid 1px var.$secondary-text-color;
   border-radius: 10px;
@@ -16,7 +17,6 @@
   position: relative;
 
   &:hover {
-    background-color: #e8f1fa;
     cursor: pointer;
   }
 }
@@ -44,6 +44,11 @@
     cursor: pointer;
   }
 }
+.iconss {
+  margin-left: auto;
+  color: var.$color-green;
+  width: 35px;
+}
 .trash {
   margin-left: 10px;
   color: var.$icon-color;
@@ -54,13 +59,18 @@
     cursor: pointer;
   }
 }
-// .close {
-//   font-size: 27px;
-//   font-weight: 900;
-//   color: rgb(227, 19, 19);
-//   margin-right: 10px;
-//   cursor: pointer;
-//   &:hover {
-//     color: rgb(255, 5, 5);
-//   }
-// }
+
+.flex {
+  display: flex;
+  align-items: center;
+
+  & p {
+    margin-left: 60px;
+    font-size: 15px;
+    font-weight: 400;
+  }
+}
+.active {
+  // background-color: red;
+  background-color: #dadbdd;
+}

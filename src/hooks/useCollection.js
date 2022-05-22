@@ -17,8 +17,9 @@ export const useCollection = (c, _q) => {
     let ref = collection(db, c);
 
     if (q) {
-      ref = query(ref, where(...q), orderBy("createdAt", "desc"));
+      ref = query(ref, where(...q), orderBy("createdAt"));
     }
+    // , orderBy("createdAt", "desc")
     const unsub = onSnapshot(
       ref,
       (snapshot) => {

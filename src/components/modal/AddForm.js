@@ -6,6 +6,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 // firebase imports
 import { db } from "../../firebase/config";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import TaskList from "../TaskList";
 
 // dummy categories
 
@@ -60,8 +61,8 @@ function AddForm({ onCloseModal }) {
         <label>
           <span>Task name:</span>
           <input
-            placeholder="maximum of 20 characters only"
-            maxLength={20}
+            placeholder="maximum of 15 characters only"
+            maxLength={15}
             required
             type="text"
             onChange={(e) => setTaskName(e.target.value)}
@@ -89,18 +90,6 @@ function AddForm({ onCloseModal }) {
             </div>
           </label>
           {/* alarm */}
-          <label>
-            <span>Alarm every</span>
-            <div className={styles["input-container"]}>
-              <input
-                type="number"
-                placeholder="mins"
-                onChange={(e) => setAlarmMinutes(e.target.value)}
-                value={alarmMinutes}
-                required
-              />
-            </div>
-          </label>
         </div>
         {/* breaks */}
         <div className={styles["label-container"]}>

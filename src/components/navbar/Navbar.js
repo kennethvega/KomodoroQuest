@@ -18,7 +18,11 @@ export default function Navbar() {
         <li>{!user && <Link to="signup">Signup</Link>}</li>
         <li>
           {user && (
-            <button className="btn" onClick={logout}>
+            <button
+              className="btn "
+              onClick={logout}
+              style={{ marginRight: "15px" }}
+            >
               Logout
             </button>
           )}
