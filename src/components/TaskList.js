@@ -19,30 +19,15 @@ function TaskList({
   setLongBreak,
   id,
 }) {
+  const [isActive, setActive] = useState("false");
   const { user } = useAuthContext();
-  const reset = async () => {
-    await setPomodoroHours(0);
-    await setPomodoroMinutes(0);
-    await setLongBreak(0);
-    await setShortBreak(0);
-  };
+
   // delete
   const handleClick = async (id) => {
     const ref = doc(db, "tasks", id);
-
     await deleteDoc(ref);
-    reset();
   };
-  // set active
-  // const handleActive = (taskId) => {
-  //   if (id === taskId) {
-  //     return setIsActive(true);
-  //   } else {
-  //     return setIsActive(false);
-  //   }
-  // };
-  // console.log(isActive);
-  console.log(id);
+
   return (
     <>
       {user && (
@@ -51,29 +36,45 @@ function TaskList({
             <h2>{user.displayName}'s tasks</h2>
             <p>progress</p>
           </div>
+
           {tasks.map((task) => (
             <li
               className={[
                 styles.task,
                 `${task.id === id ? styles.active : ""}`,
               ].join(" ")}
-              // className={styles.task}
               key={task.id}
-              onClick={() => {
-                setPomodoroMinutes(task.durationMinutes);
-                setLongBreak(task.longBreakMinutes);
-                setShortBreak(task.shortBreakMinutes);
-                setId(task.id);
-                setPomodoroHours(task.durationHours);
-              }}
             >
-              <div>
-                <BiCheckbox size="30px" className={styles.iconss} />
+              <div
+                className={styles["content-container"]}
+                onClick={() => {
+                  setPomodoroMinutes(task.durationMinutes);
+                  setLongBreak(task.longBreakMinutes);
+                  setShortBreak(task.shortBreakMinutes);
+                  setId(task.id);
+                  setPomodoroHours(task.durationHours);
+
+                  // if (task.id === id) {
+                  //   setActive(true);
+                  // } else {
+                  //   setActive(false);
+                  // }
+                }}
+              >
+                <div>
+                  <BiCheckbox size="30px" className={styles.iconss} />
+                </div>
+                <p className={styles["task-title"]}>{task.taskName}</p>
+                <div className={styles.progress} data-label="loading"></div>
               </div>
-              <p className={styles["task-title"]}>{task.taskName}</p>
-              <div className={styles.progress}></div>
               <Tippy content="Edit task">
-                <div className={styles.icons} onClick={onShowModal}>
+                <div
+                  className={styles.icons}
+                  onClick={() => {
+                    onShowModal();
+                    setId(task.id);
+                  }}
+                >
                   <BiEdit size="25px" />
                 </div>
               </Tippy>
@@ -81,6 +82,7 @@ function TaskList({
                 <div
                   className={styles.trash}
                   onClick={() => {
+                    setId(task.id);
                     handleClick(task.id);
                   }}
                 >

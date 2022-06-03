@@ -1,0 +1,11 @@
+@use "../style/variable.scss" as var;
+
+h1 {
+  font-size: 6rem;
+  color: var.$bg-light;
+}
+.subtitle {
+  display: flex;
+  gap: 76px;
+  font-size: 13px;
+}

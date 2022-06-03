@@ -29,6 +29,7 @@ function Home() {
   const switchStage = (index) => {
     setStage(index);
   };
+
   const getTickingTime = () => {
     const timeStage = {
       0: pomodoro,

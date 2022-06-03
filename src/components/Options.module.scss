@@ -1,0 +1,32 @@
+@use "../style/variable.scss" as var;
+.option-container {
+  display: flex;
+  max-width: 365px;
+  margin: 10px auto;
+}
+.options {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  & h2 {
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+
+    transition: all 0.3s;
+    padding: 5px;
+    border-radius: 10px;
+    &:hover {
+      background-color: #dadbdd;
+    }
+  }
+}
+.active {
+  background-color: #dadbdd;
+  cursor: pointer;
+  color: var.$secondary-text-color;
+  transition: all 0.3s;
+  padding: 5px;
+  border-radius: 10px;
+}

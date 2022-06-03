@@ -2,10 +2,14 @@
 .task-container {
   max-width: 480px;
   margin: 0 auto;
+  & li {
+    display: flex;
+    gap: 10px;
+  }
 }
 .task {
   width: 100%;
-  background-color: #fbfbfb;
+  background-color: var.$bg-light;
 
   height: 48px;
   border: solid 1px var.$secondary-text-color;
@@ -25,14 +29,13 @@
   padding: 10px;
   color: var.$secondary-text-color;
   font-weight: 600;
+  width: 100px;
 }
 .progress {
-  width: 150px;
-  height: 47px;
-  border-top: 8px solid var.$secondary-text-color;
-  position: absolute;
-  top: 50%;
-  left: 35%;
+  width: 200px;
+  height: 10px;
+  background-color: var.$secondary-text-color;
+  display: flex;
 }
 .icons {
   margin-left: auto;
@@ -45,12 +48,12 @@
   }
 }
 .iconss {
-  margin-left: auto;
   color: var.$color-green;
   width: 35px;
+  margin: 0;
 }
 .trash {
-  margin-left: 10px;
+  margin: 0 10px;
   color: var.$icon-color;
   transition: all 0.3s;
   width: 35px;
@@ -73,4 +76,11 @@
 .active {
   // background-color: red;
   background-color: #dadbdd;
+}
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 491px;
+  height: 50px;
 }
